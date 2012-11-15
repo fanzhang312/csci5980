@@ -1,0 +1,166 @@
+SQL> select name from country where region = 'South America' order by population asc;
+
+NAME                                                                            
+--------------------------------------------------                              
+Falkland Islands (Islas Malvinas)                                               
+French Guiana                                                                   
+Suriname                                                                        
+Guyana                                                                          
+Uruguay                                                                         
+Paraguay                                                                        
+Bolivia                                                                         
+Ecuador                                                                         
+Chile                                                                           
+Venezuela                                                                       
+Peru                                                                            
+
+NAME                                                                            
+--------------------------------------------------                              
+Argentina                                                                       
+Colombia                                                                        
+Brazil                                                                          
+
+14 rows selected.
+
+SQL>  select * from country where region = 'North America' and population < 10000000;
+
+NAME                                                                            
+--------------------------------------------------                              
+REGION                                                             AREA         
+------------------------------------------------------------ ----------         
+POPULATION        GDP                                                           
+---------- ----------                                                           
+Bermuda                                                                         
+North America                                                        50         
+     61629 1700000000                                                           
+                                                                                
+Saint Pierre and Miquelon                                                       
+North America                                                       242         
+      6757   66000000                                                           
+
+NAME                                                                            
+--------------------------------------------------                              
+REGION                                                             AREA         
+------------------------------------------------------------ ----------         
+POPULATION        GDP                                                           
+---------- ----------                                                           
+                                                                                
+
+SQL>  select name from country where gdp>5000000000 and gdp<6000000000 order by area desc;
+
+NAME                                                                            
+--------------------------------------------------                              
+Namibia                                                                         
+Gabon                                                                           
+Haiti                                                                           
+Mali                                                                            
+
+SQL> select region from country where name like '%x%';
+
+REGION                                                                          
+------------------------------------------------------------                    
+Europe                                                                          
+North America                                                                   
+
+SQL>  select count(name) as num_countries from country where region = 'Africa';
+
+NUM_COUNTRIES                                                                   
+-------------                                                                   
+           59                                                                   
+
+SQL> select avg(area) as avg_area from country where region = 'Central America and the Caribbean';
+
+  AVG_AREA                                                                      
+----------                                                                      
+  23715.25                                                                      
+
+SQL> select region, count(*) from country where population > '100000000' group by region having count(*) > 5;
+
+REGION                                                         COUNT(*)         
+------------------------------------------------------------ ----------         
+Asia                                                                  6         
+
+SQL>  select region, sum(gdp)/sum(population) from country where population <> '0' group by region order by sum(gdp)/sum(population) desc;
+
+REGION                                                                          
+------------------------------------------------------------                    
+SUM(GDP)/SUM(POPULATION)                                                        
+------------------------                                                        
+North America                                                                   
+              20990.4401                                                        
+                                                                                
+Europe                                                                          
+              16725.2411                                                        
+                                                                                
+Oceania                                                                         
+              15757.6524                                                        
+                                                                                
+
+REGION                                                                          
+------------------------------------------------------------                    
+SUM(GDP)/SUM(POPULATION)                                                        
+------------------------                                                        
+Arctic Region                                                                   
+              13781.5713                                                        
+                                                                                
+South America                                                                   
+              5578.20465                                                        
+                                                                                
+World                                                                           
+              5477.50276                                                        
+                                                                                
+
+REGION                                                                          
+------------------------------------------------------------                    
+SUM(GDP)/SUM(POPULATION)                                                        
+------------------------                                                        
+Middle East                                                                     
+              5183.48453                                                        
+                                                                                
+Ethnic Groups in Eastern Europe, Europe                                         
+              4092.40927                                                        
+                                                                                
+Southeast Asia                                                                  
+              3631.73218                                                        
+                                                                                
+
+REGION                                                                          
+------------------------------------------------------------                    
+SUM(GDP)/SUM(POPULATION)                                                        
+------------------------                                                        
+Commonwealth of Independent States - European States                            
+              3537.14701                                                        
+                                                                                
+Asia                                                                            
+              3023.23583                                                        
+                                                                                
+Central America and the Caribbean                                               
+              3000.38353                                                        
+                                                                                
+
+REGION                                                                          
+------------------------------------------------------------                    
+SUM(GDP)/SUM(POPULATION)                                                        
+------------------------                                                        
+Commonwealth of Independent States - Central Asian States                       
+              2518.63542                                                        
+                                                                                
+Africa                                                                          
+              1513.57623                                                        
+                                                                                
+
+14 rows selected.
+
+SQL> insert into country(name, population, area) values('CCC', '1', '9999');
+
+1 row created.
+
+SQL> update country set population = population + 1000000 where gdp > 10000000000;
+
+109 rows updated.
+
+SQL> delete from country where region is null;
+
+1 row deleted.
+
+SQL> spool off;

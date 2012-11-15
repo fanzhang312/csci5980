@@ -1,0 +1,40 @@
+CREATE INDEX roads_idx ON roads_major(geom) INDEXTYPE IS MDSYS.SPATIAL_INDEX;
+
+CREATE INDEX natural_idx ON natural(geom) INDEXTYPE IS MDSYS.SPATIAL_INDEX;
+
+1:
+select a2.id as A2ID, a1.id as A1ID from activities a1, activities a2 where a2.id = 1 and mdsys.SDO_NN(a1.geom, a2.geom, 'sdo_num_res=3') = 'TRUE'; 
+
+2:
+select act.id, road.osm_id from activities act, roads_major road where mdsys.SDO_NN(act.geom, road.geom,'sdo_num_res=1') = 'TRUE';
+
+3:
+select road.osm_id, road.name, natural.osm_id from roads_major road, natural where mdsys.SDO_OVERLAPS(road.geom,natural.geom) = 'TRUE' and natural.type = 'water';
+
+select road.osm_id, road.name, natural.osm_id from roads_major road, natural where natural.type = 'water' and mdsys.SDO_OVERLAPS(road.geom,natural.geom) = 'TRUE';
+
+4:
+select n1.osm_id, n2.osm_id from natural n1, natural n2 where n1.type='riverbank' and n2.type='riverbank' and mdsys.SDO_OVERLAPS(n1.geom, n2.geom) = 'TRUE'and n1.osm_id< n2.osm_id;
+
+5:
+select n1.osm_id, n1.type, n2.osm_id, n2.type from natural n1, natural n2 where n1.type='riverbank' and n2.type='forest' and mdsys.SDO_TOUCH(n1.geom, n2.geom) = 'TRUE';
+
+
+PART C: Impact on Query Response Time
+
+set timing on;
+
+1:
+select distinct n1.osm_id, n1.type, n2.osm_id, n2.type from natural n1, natural n2, user_sdo_geom_metadata m where n1.type='park' and n2.type='park' and n1.osm_id<n2.osm_id and mdsys.SDO_GEOM.WITHIN_DISTANCE(n1.geom,m.diminfo,1,n2.geom,m.diminfo) = 'TRUE';
+
+
+Elapsed: 00:00:10.06
+
+2:
+select distinct n1.osm_id, n1.type, n2.osm_id, n2.type from natural n1, natural n2 where n1.type='park' and n2.type='park' and n1.osm_id<n2.osm_id and mdsys.SDO_WITHIN_DISTANCE(n1.geom,n2.geom,'distance = 1') = 'TRUE';
+
+Elapsed: 00:00:05.13
+
+
+3:
+Q2 has better performance than Q1. It's almost twice faster than Q1. The reason is Q2 use spatial operators, which provide optimum performance since they use the spatial index.

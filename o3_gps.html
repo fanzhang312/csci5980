@@ -1,0 +1,250 @@
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>       
+    <!-- University of Minnesota Web template:  v4.100219 -->
+            
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <!--
+    If a particular version of Internet Explorer supports more than one 
+    requested compatibility mode, it will use the highest available mode listed 
+    in the header's content attribute. Reference:
+    http://msdn.microsoft.com/en-us/library/cc288325(VS.85).aspx#Content
+    -->
+    <meta http-equiv="X-UA-Compatible" content="IE=6; IE=7; IE=8" />
+    <title>CSci 5980: From GPS & Google Earth to Spatial Computing</title><!-- UMN stylesheets/scripts -->
+
+    <link rel="shortcut icon" href="http://www1.umn.edu/twincities/favicon.ico" type="image/x-icon" />
+    
+
+    <link href="http://cselabs.umn.edu/class-templates/template/lib/css/reset.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="http://cselabs.umn.edu/class-templates/template/lib/css/text.css" rel="stylesheet" type="text/css" media="screen" />
+    
+    <link href="http://cselabs.umn.edu/class-templates/template/lib/css/template.css" rel="stylesheet" type="text/css" media="screen" />
+    <!-- <link href="http://cselabs.umn.edu/class-templates/template/lib/css/optional.css" rel="stylesheet" type="text/css" media="screen" /> -->
+    <link href="http://cselabs.umn.edu/class-templates/template/lib/css/print.css" rel="stylesheet" type="text/css" media="print" />
+    <script type="text/javascript" src="http://cselabs.umn.edu/class-templates/template/lib/js/searchfield.js"></script>
+    <script type="text/javascript" src="http://cselabs.umn.edu/class-templates/template/lib/js/spamspan.js"></script>
+    
+    <!-- CSE stylesheets/scripts Version 1.0 -->
+    <link rel="stylesheet" type="text/css" href="http://cselabs.umn.edu/class-templates/template/lib/css/cse_default.css" />
+    <link href="http://cse.umn.edu/x_hosted/branding/cse.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="http://cse.umn.edu/x_hosted/branding/cse_print.css" rel="stylesheet" type="text/css" media="print" />
+    <script type="text/javascript" src="http://cse.umn.edu/x_hosted/branding/jquery-1.4.1.min.js"></script>
+    <script type="text/javascript" src="http://cse.umn.edu/x_hosted/branding/cse.js"></script>    
+            
+    <!-- Computer Science Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="http://cselabs.umn.edu/class-templates/template/lib/css/cs-template.css" />
+
+    <!-- STYLE SHEETS TO FIX INTERNET EXPLORER INCONSISTENCIES -->
+
+    <!--[if IE 6]>  
+        <link rel="stylesheet" type="text/css" href="http://cselabs.umn.edu/class-templates/template/lib/css/IE6.css" />  
+    <![endif]-->  
+    <!--[if IE 7]>  
+        <link rel="stylesheet" type="text/css" href="http://cselabs.umn.edu/class-templates/template/lib/css/IE7.css" />  
+    <![endif]--> 
+
+    <!-- Site Specific stylesheets -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="js/geo.js"></script>
+<link href="http://cselabs.umn.edu/class-templates/css/class_temp.css" rel="stylesheet" type="text/css" />
+            <style type="text/css">
+                #main_head {
+                    background-image: url("http://cselabs.umn.edu/class-templates/images/cs-grey-960x95.jpg");
+                    width: 800px;
+                    height: 55px;
+                    margin-left: 0px;
+                }
+
+                #main_head #title {
+                    background-color: rgba(0,0,255,0.5);
+                    filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr="#7F0000FF", EndColorStr="#7F0000FF");
+                    padding-top: 22px;
+                    padding-bottom: 10px;
+                    margin: 0px;
+                }
+                #main_head #title a {
+                    font-family: Georgia, Helvetica, sans-serif;
+                    margin-left: 8px;
+                    font-size: 200%;
+                    font-weight: bold;    
+                    color: #FFFFFF !important;
+                } 
+				.geo_controls{
+					padding:0px;
+					margin:0px;
+					width:390px;
+					float:left;
+				}
+            </style>
+            <!--[if IE 7]>  
+                <style>
+                     #main_head #title {
+                        padding-bottom: 15px;
+                     }
+                </style>
+            <![endif]--> 
+            
+</head>
+            
+<body>            
+            
+    <!--BEGIN WORDMARK AND UNIT IDENTIFICATION FOR PRINT -->
+    <!--Use this code along with the print.css to retain the University's wordmark on you printed Web pages and to identify your unit -->
+    <div class="leftprint">
+        <img src="http://cselabs.umn.edu/class-templates/template/assets/img/smMwdmk.gif" alt="University of Minnesota" width="216" height="55" hspace="10" align="left" style="margin-bottom: 5px;"/>
+    </div>
+    
+    <!-- CSE -->
+    <div class="rightprint"><strong>CSci 5980: From GPS & Google Earth to Spatial Computing</strong><br />
+        index.php<br />
+    </div>
+    <!--END WORDMARK AND UNIT IDENTIFICATION FOR PRINT -->
+
+    <!-- * Skip Links * -->
+    <p id="skipLinks">
+        <a href="#main_nav">Main navigation</a> | 
+        <a href="#maincontent">Main content</a>
+    </p>
+    
+    <div id="header">
+        <!-- BEGIN CAMPUS LINKS -->
+        <div id="campus_links">
+            <p>Campuses: </p>
+            <ul>
+                <li><a href="http://www.umn.edu/">Twin Cities</a></li>
+                <li><a href="http://www.crk.umn.edu/">Crookston</a></li>
+                <li><a href="http://www.d.umn.edu/">Duluth</a></li>
+                <li><a href="http://www.morris.umn.edu/">Morris</a></li>
+                <li><a href="http://www.r.umn.edu/">Rochester</a></li>
+                <li><a href="http://www.umn.edu/campuses.php">Other Locations</a></li>
+            </ul>
+        </div>
+         <!-- END CAMPUS LINKS -->
+                      
+                     
+        <!-- * BEGIN TEMPLATE HEADER (MAROON BAR)* -->
+        <div id="headerUofM">     
+            <div id="logo_uofm"><a href="http://www.umn.edu/">Go to the U of M home page</a></div>
+
+                <!--BEGIN search div-->
+                <div id="search_area">
+                    <div id="search_nav"><a href="http://onestop.umn.edu/" id="btn_onestop">OneStop</a> <a href="https://www.myu.umn.edu/" id="btn_myu">myU</a></div>
+                        
+                        <div class="search"> 
+                            <form action="http://search.umn.edu/tc/" method="get" id="gsearch" title="Search U of M Web sites">
+                            <fieldset>
+                                <label for="search_field">Search U of M Web sites</label>
+                                <input type="text" id="search_field" name="q" value="Search U of M Web sites"  title="Search text"  />   
+                                <input class="search_btn" type="image" src="http://cselabs.umn.edu/class-templates/template/assets/img/search_button.gif" alt="Submit Search" value="Search" />
+                                <input name="client" value="searchumn" type="hidden" />
+                                <input name="site" value="default_collection" type="hidden" />
+                                <input name="proxystylesheet" value="searchumn" type="hidden" />
+                                <input name="output" value="xml_no_dtd" type="hidden" />
+                                <input type="hidden" name="r" value="" />
+                                <input type="hidden" name="l" value="CSci 5980: From GPS & Google Earth to Spatial Computing" />
+                                <input type="hidden" name="u" value="1" />
+                            </fieldset>
+                            </form>  
+                        </div> 
+                    </div>
+                </div>
+               <!-- end "search" area -->
+
+            </div>
+           <!-- End search div -->
+
+        <!--END UofM TEMPLATE HEADER-->
+        
+        <!-- BEGIN CSE BRANDING HEADER Version 1.0 -->  
+        <div id="CSEHeader">
+            <ul>
+                <li><a id="CSELogo" href="http://cse.umn.edu/">College of Science and Engineering</a></li>
+            </ul>
+        </div>
+        <!-- END CSE BRANDING HEADER -->
+            
+             <!-- BEGIN TWO COLUMN PAGE CONTENT -->
+            <div class="container_12" id="content-container">
+                <div id="two-col" class="bkg-repeat">
+        
+            <!-- BEGIN LEFT NAVIGATION -->
+            <div class="grid_2" id="main_nav_2">
+                
+        <ul class="main_nav">
+            <li><a href="index.php">Home</a></li>
+    <li><a href="index.php?page=lectureNotes/index">Slides</a></li><li><a href="index.php?page=encyclopedia">Encyclopedia of GIS</a></li><li><a href="index.php?page=homeworks/index">Homework</a></li><li><a href="index.php?page=homeworks/textbookProblems">Textbook Problems</a></li><li><a href="index.php?page=schedule">Schedule</a></li><li><a href="index.php?page=teams">Teams</a></li><li><a href="index.php?page=announcements">Instructor Announcements</a></li><li><a href="index.php?page=ta_announcements">TA Announcements</a></li><li><a href="index.php?page=home">Syllabus</a></li></ul>                
+                <br class="clearabove" />
+            </div>
+            <!-- END LEFT NAVIGATION -->
+                        
+                <!-- BEGIN Unit Graphic Header for home page -->
+                <div id="main_head" class="grid_10">
+                    <div id="title">
+                        <a href="index.php">CSci 5980: From GPS & Google Earth to Spatial Computing</a>
+                    </div>
+                    
+                </div>
+                <!-- END Unit Graphic Header for home page -->          
+        
+                    <!-- BEGIN CENTER COLUMN -->
+                    <div class="grid_10" id="page_content">
+                        <div id="center-content">
+                
+
+
+	
+
+	
+	
+	
+	
+	<div class="geo_controls">
+	<div class="output" id="output"></div>
+		<button id="geo_start_stop">
+			Start
+		</button>
+	</div>
+	<div class="geo_controls">
+	<div class="output" id="output_2"></div>
+		<button id="enable_high_accuracy">
+			Enable High Accuracy 
+		</button>
+	</div>
+
+	
+
+
+                    
+                        </div>
+                    </div>
+                    <!-- END CENTER COLUMN -->
+        
+                </div>
+            </div>
+            <!-- END TWO COLUMN PAGE CONTENT -->
+                    
+            <!-- BEGIN UofM FOOTER -->
+            <div class="grid_7 alpha" id="footer_inner">
+                <ul class="copyright"><li>&copy; 2012 Regents of the University of Minnesota. All rights reserved.</li>
+                    <li>The University of Minnesota is an equal opportunity educator and employer</li>          
+                    <li>Last modified on October 29, 2012</li>
+                </ul>
+            </div>
+            <div class="grid_5 omega" id="footer_right">
+                <ul class="footer_links">
+                    <li>Twin Cities Campus: </li>
+                    <li><a href="http://www1.umn.edu/pts/">Parking &amp; Transportation</a></li>
+                    <li><a href="http://www.umn.edu/twincities/maps/index.html">Maps &amp; Directions</a></li>
+                </ul><br class="clearabove" />
+                <ul class="footer_links"><li><a href="http://www.directory.umn.edu/">Directories</a></li>
+                    <li><a href="http://www.umn.edu/twincities/contact/">Contact U of M</a></li>
+                    <li><a href="http://www.privacy.umn.edu/">Privacy</a></li>
+                </ul>
+                <p>&nbsp;</p>
+                <br class="clearabove" />
+            </div>
+            <!-- END UofM FOOTER -->
+    </body>
+</html>
