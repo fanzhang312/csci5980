@@ -1,0 +1,60 @@
+--2.How many nodes are in the network?
+
+SELECT SDO_NET.GET_NO_OF_NODES('hennepin') FROM DUAL;
+
+
+
+--3.What is the degree of node 40358?
+
+SELECT SDO_NET.GET_NODE_DEGREE('hennepin', 40358) FROM DUAL;
+
+
+--4.Find all nodes with an in degree of at least 4
+
+
+SELECT n.NODE_ID FROM DUAL, hennepin_node$ n WHERE SDO_NET.GET_NODE_IN_DEGREE('hennepin', n.NODE_ID) >= 4;
+
+
+--5.What is the average out degree of all nodes in the network?
+
+SELECT AVG(SDO_NET.GET_NODE_OUT_DEGREE('hennepin',n.NODE_ID)) AS avg_out_degree FROM DUAL,hennepin_node$ n;
+
+
+--6.Retrieve the travel times (TRANSIT_TIME) for link 300 with start time and end time occuring between 630 and 1020
+
+SELECT TRANSIT_TIME from F12C5980G24.hennepin_transit_time where START_TIME >= 620 AND END_TIME <= 1020 AND TRANSIT_ID = 300;
+
+
+--retrieve the travel times (TRANSIT_TIME) for link 300 with start time and end time occuring between 1230 and 1440
+
+SELECT TRANSIT_TIME from F12C5980G24.hennepin_transit_time WHERE START_TIME >= 1230 AND END_TIME <= 1440 AND TRANSIT_ID = 300;
+
+
+--7.What are the minimum and maximum travel times for link 1000
+
+SELECT MIN(TRANSIT_TIME) as minimum_travel_time, MAX(TRANSIT_TIME) as maximum_travel_time from F12C5980G24.hennepin_transit_time WHERE TRANSIT_ID = 1000;
+
+
+--8.What is the travel time of the route consisting of links 130, 1476, 1478 and 738 between 705 and 930? 
+
+WITH route as (SELECT * from F12C5980G24.hennepin_transit_time WHERE (TRANSIT_ID = 130 or TRANSIT_ID = 1476 or 
+TRANSIT_ID = 1478 or TRANSIT_ID = 738) and START_TIME >=705 and END_TIME <= 930)
+SELECT a.START_TIME as Start_130, a.END_TIME as End_130, b.START_TIME as Start_1476, b.END_TIME as End_1476,
+ c.START_TIME as Start_1478, c.END_TIME as End_1478, d.START_TIME as Start_738, d.END_TIME as End_738, 
+ a.TRANSIT_TIME+b.TRANSIT_TIME+c.TRANSIT_TIME+d.TRANSIT_TIME as TOTAL_TRAVEL_TIME
+ from route a, route b, route c, route d
+ WHERE a.TRANSIT_ID = 130 and b.TRANSIT_ID = 1476 and c.TRANSIT_ID = 1478 and d.TRANSIT_ID = 738 
+ and d.START_TIME >= c.END_TIME and c.START_TIME >= b.END_TIME and b.START_TIME >= a.END_TIME;
+
+--What is the travel time on the same route between 0 and 330? 
+
+ WITH route as (SELECT * from F12C5980G24.hennepin_transit_time WHERE (TRANSIT_ID = 130 or TRANSIT_ID = 1476 or 
+TRANSIT_ID = 1478 or TRANSIT_ID = 738) and START_TIME >=0 and END_TIME <= 300)
+SELECT a.START_TIME as Start_130, a.END_TIME as End_130, b.START_TIME as Start_1476, b.END_TIME as End_1476,
+ c.START_TIME as Start_1478, c.END_TIME as End_1478, d.START_TIME as Start_738, d.END_TIME as End_738, 
+ a.TRANSIT_TIME+b.TRANSIT_TIME+c.TRANSIT_TIME+d.TRANSIT_TIME as TOTAL_TRAVEL_TIME
+ from route a, route b, route c, route d
+ WHERE a.TRANSIT_ID = 130 and b.TRANSIT_ID = 1476 and c.TRANSIT_ID = 1478 and d.TRANSIT_ID = 738 
+ and d.START_TIME >= c.END_TIME and c.START_TIME >= b.END_TIME and b.START_TIME >= a.END_TIME;
+
+
